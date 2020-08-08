@@ -1,0 +1,45 @@
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace PixMicro.Core
+{
+    public class Base64Image
+    {
+        public string Base64String { get; }
+        public byte[] Bytes { get; }
+
+        public Base64Image(string base64String)
+        {
+            this.Base64String = base64String;
+            this.Bytes = Convert.FromBase64String(this.Base64String);
+        }
+
+        public Base64Image(byte[] bytes)
+        {
+            this.Bytes = bytes;
+            this.Base64String = Convert.ToBase64String(this.Bytes);
+        }
+    }
+
+    public class Base64ImageJsonConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(Base64Image);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            // Load the JSON for the Result into a JObject
+            return new Base64Image((string)reader.Value);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((Base64Image)value).Base64String);
+        }
+    }
+}

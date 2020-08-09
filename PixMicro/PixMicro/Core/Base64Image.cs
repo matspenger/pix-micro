@@ -13,7 +13,13 @@ namespace PixMicro.Core
 
         public Base64Image(string base64String)
         {
-            this.Base64String = base64String;
+            var processedString = base64String;
+            // Remove URI scheme, if present
+            if (base64String.Contains(","))
+            {
+                processedString = base64String.Substring(base64String.IndexOf(",") + 1);
+            }
+            this.Base64String = processedString;
             this.Bytes = Convert.FromBase64String(this.Base64String);
         }
 

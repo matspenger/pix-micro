@@ -1,0 +1,23 @@
+{
+    "name": "example-client",
+    "version": "0.0.0",
+    "description": "ExampleClient",
+    "main": "server.js",
+    "author": {
+        "name": ""
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "path": "^0.12.7",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "ts-loader": "^8.0.2",
+        "typescript": "^3.9.7",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    },
+    "scripts": {
+        "build": "webpack-cli app.tsx --config webpack-config.js"
+    }
+}

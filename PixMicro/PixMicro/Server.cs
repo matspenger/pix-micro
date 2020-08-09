@@ -21,15 +21,22 @@ namespace PixMicro
         {
             using (var reader = new StreamReader(req.Body))
             {
-                dynamic content = await reader.ReadToEndAsync();
+                string content = await reader.ReadToEndAsync();
 
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.Converters.Add(new Base64ImageJsonConverter());
-                var flip = JsonConvert.DeserializeObject<Flip>(content, settings);
+                if (string.IsNullOrEmpty(content))
+                {
+                    return new BadRequestObjectResult("Request body was empty");
+                }
+                else
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new Base64ImageJsonConverter());
+                    var flip = JsonConvert.DeserializeObject<Flip>(content, settings);
 
-                var outputImg = flip.Apply();
-                var response = new ImageResponse(outputImg);
-                return new OkObjectResult(JsonConvert.SerializeObject(response, settings));
+                    var outputImg = flip.Apply();
+                    var response = new ImageResponse(outputImg);
+                    return new OkObjectResult(JsonConvert.SerializeObject(response, settings));
+                }
             }
         }
     }

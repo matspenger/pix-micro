@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixMicro", "PixMicro\PixMicro.csproj", "{952B2D68-BDAC-44B0-8962-81082319EBC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PixMicro", "PixMicro\PixMicro.csproj", "{952B2D68-BDAC-44B0-8962-81082319EBC7}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ExampleClient", "ExampleClient\ExampleClient.njsproj", "{451E9283-6BCC-4B1B-8E58-3AF79B6BBB5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{952B2D68-BDAC-44B0-8962-81082319EBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952B2D68-BDAC-44B0-8962-81082319EBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952B2D68-BDAC-44B0-8962-81082319EBC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{451E9283-6BCC-4B1B-8E58-3AF79B6BBB5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451E9283-6BCC-4B1B-8E58-3AF79B6BBB5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451E9283-6BCC-4B1B-8E58-3AF79B6BBB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451E9283-6BCC-4B1B-8E58-3AF79B6BBB5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,12 +7,14 @@ using System.Text;
 
 namespace PixMicro.Transforms
 {
+    /// <summary>
+    /// Flips an image, horizontally or vertically (or both).
+    /// </summary>
     public class Flip : IImageOperation
     {
         private readonly Mat outputMat = new Mat();
 
         public FlipMode Mode { get; set; }
-
         public Base64Image InputImage { get; set; }
 
         public Base64Image Apply()

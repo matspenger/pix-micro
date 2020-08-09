@@ -3,15 +3,14 @@ declare var require: any
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-const serverAddr = "http://localhost:7071/api/";
-const base64UriScheme = "data:image/jpeg;base64,";
+import FlipForm from './components/FlipForm';
+import RotateForm from './components/RotateForm';
 
 interface IProps {
-
 }
 
 interface IState {
-    imageBase64: string
+    imageBase64: string;
 }
 
 export class App extends React.Component<IProps, IState> {
@@ -23,31 +22,11 @@ export class App extends React.Component<IProps, IState> {
         };
 
         this.loadImage = this.loadImage.bind(this);
-        this.flip = this.flip.bind(this);
+        this.updateImage = this.updateImage.bind(this);
+        this.hasImage = this.hasImage.bind(this);
     }
 
-    flip(mode: string) {
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let responseObj = JSON.parse(xhr.response);
-                let base64 = responseObj["OutputImage"];
-                if (!base64.startsWith(base64UriScheme)) {
-                    base64 = base64UriScheme + base64;
-                }
-                this.setState({ imageBase64: base64 });
-            }
-        };
-        let content = JSON.stringify({
-            "Mode": mode,
-            "InputImage": this.state.imageBase64
-        });
-        xhr.open("POST", serverAddr + "flip");
-        xhr.setRequestHeader("Content-Type", "text/plain");
-        xhr.send(content);
-    }
-
-    loadImage(event) {
+    loadImage(event): void {
         let fr = new FileReader();
         fr.addEventListener("load", () => {
             this.setState({ imageBase64: fr.result });
@@ -55,20 +34,34 @@ export class App extends React.Component<IProps, IState> {
         fr.readAsDataURL(event.target.files[0]);
     }
 
+    hasImage(): boolean {
+        return this.state.imageBase64 !== "";
+    }
+
+    updateImage(imageBase64: string) {
+        this.setState({ imageBase64: imageBase64 });
+    }
+
     render() {
         return (
             <div id="content">
-                <div className="toolbar">
-                    <button>Undo</button>
-                    <button>Redo</button>
-                    <button onClick={() => this.flip("X")}>Flip X</button>
-                    <button onClick={() => this.flip("Y")}>Flip Y</button>
-                    <button onClick={() => this.flip("XY")}>Flip XY</button>
-                </div>
-                <div id="image">
-                    <label htmlFor="load-img">Load image file:</label>
-                    <input type="file" id="load-img" name="load-img" onChange={this.loadImage} />
-                    <img src={this.state.imageBase64} />
+                <div id="content-inner">
+                    <div className="toolbar" id="main-toolbar">
+                        <button disabled={true}>Undo</button>
+                        <button disabled={true}>Redo</button>
+                        <FlipForm outputHandler={this.updateImage} isEnabled={this.hasImage()} inputImage={this.state.imageBase64} />
+                        <RotateForm outputHandler={this.updateImage} isEnabled={this.hasImage()} inputImage={this.state.imageBase64} />
+                    </div>
+                    <div id="image">
+                        <div id="file-form">
+                            <label htmlFor="load-img">Load image file: </label>
+                            <input type="file" id="load-img" name="load-img" onChange={this.loadImage} />
+                        </div>
+                        <div id="image-holder">
+                            <div id="no-image-message" className={!this.hasImage() ? "visible" : "hidden"}>No image selected</div>
+                            <img src={this.state.imageBase64} />
+                        </div>
+                    </div>
                 </div>
             </div>
         );

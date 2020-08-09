@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PixMicro.Core
 {
+    /// <summary>
+    /// An image, encoded as a base64 string.
+    /// </summary>
     public class Base64Image
     {
         public string Base64String { get; }

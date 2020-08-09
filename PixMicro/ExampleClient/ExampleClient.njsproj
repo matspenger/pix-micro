@@ -31,12 +31,23 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include=".gitignore">
+      <SubType>Code</SubType>
+    </Content>
+    <None Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults">
+      <SubType>Content</SubType>
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </Content>
     <Content Include="index.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="style\style.css" />
+    <Content Include="style\style.min.css" />
+    <Content Include="style\style.scss" />
     <Content Include="tsconfig.json">
       <SubType>Code</SubType>
     </Content>
@@ -48,6 +59,19 @@
     <TypeScriptCompile Include="app.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="components\FlipForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="components\RotateForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="components\ToolbarForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="components\" />
+    <Folder Include="style\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

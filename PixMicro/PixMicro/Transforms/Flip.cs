@@ -10,18 +10,23 @@ namespace PixMicro.Transforms
     /// <summary>
     /// Flips an image, horizontally or vertically (or both).
     /// </summary>
-    public class Flip : IImageOperation
+    public class Flip : AbstractImageOperation
     {
         private readonly Mat outputMat = new Mat();
-
+        /// <summary>
+        /// Specifies flip mode: horizontal, vertical or both axes.
+        /// </summary>
         public FlipMode Mode { get; set; }
-        public Base64Image InputImage { get; set; }
 
-        public Base64Image Apply()
+        /// <inheritdoc />
+        public override Base64Image InputImage { get; set; }
+
+        /// <inheritdoc />
+        public override Base64Image Apply()
         {
             var inputMat = Cv2.ImDecode(this.InputImage.Bytes, ImreadModes.Color);
             Cv2.Flip(inputMat, this.outputMat, this.Mode);
-            Cv2.ImEncode(".jpg", this.outputMat, out byte[] output);
+            Cv2.ImEncode(this.OutputEncoding, this.outputMat, out byte[] output);
             return new Base64Image(output);
         }
     }

@@ -16,7 +16,7 @@ export default class RotateForm extends ToolbarForm<IToolbarFormProps, IState> {
         super(props, state);
 
         this.state = {
-            rotateDeg: 0
+            rotateDeg: 90
         };
 
         this.handleRotatePresetChange = this.handleRotatePresetChange.bind(this);
@@ -25,7 +25,6 @@ export default class RotateForm extends ToolbarForm<IToolbarFormProps, IState> {
     }
 
     handleRotatePresetChange(event) {
-        console.log("Value: " + event.target.value);
         if (event.target.value === "custom") {
             this.setState({ isCustom: true });
         } else {
@@ -40,7 +39,6 @@ export default class RotateForm extends ToolbarForm<IToolbarFormProps, IState> {
     execute() {
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = () => this.handleResponse(xhr);
-
         let content = JSON.stringify({
             "RotateByDeg": this.state.rotateDeg,
             "InputImage": this.props.inputImage

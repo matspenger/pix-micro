@@ -30,6 +30,7 @@ namespace PixMicro
         /// {
         ///     "Mode": // "X" for horizontal flip, "Y" for vertical flip, "XY" for both,
         ///     "InputImage": // Image encoded as a base64 string
+        ///     "OutputEncoding": // Optional, default is ".jpg"
         /// }
         /// 
         /// Response format:
@@ -39,7 +40,7 @@ namespace PixMicro
         /// </remarks>
         /// <param name="req">Request object</param>
         /// <param name="log">Log provider</param>
-        /// <returns></returns>
+        /// <returns>Response message, containing Base64 encoded image with transform applied</returns>
         [FunctionName("Flip")]
         public static async Task<IActionResult> Flip(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
@@ -60,6 +61,51 @@ namespace PixMicro
                     var flip = JsonConvert.DeserializeObject<Flip>(content, settings);
 
                     var outputImg = flip.Apply();
+                    var response = new ImageResponse(outputImg);
+                    return new OkObjectResult(JsonConvert.SerializeObject(response, settings));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Rotates an image around its centre.
+        /// </summary>
+        /// <remarks>
+        /// Request format:
+        /// {
+        ///     "RotateByDeg": // Angle in degrees to rotate by. Positive values rotate counter-clockwise.
+        ///     "InputImage": // Image encoded as a base64 string
+        ///     "OutputEncoding": // Optional, default is ".jpg"
+        /// }
+        /// 
+        /// Response format:
+        /// {
+        ///     "OutputImage": // Image as a result of flip, again, base64 encoded.
+        /// }
+        /// </remarks>
+        /// <param name="req">Request object</param>
+        /// <param name="log">Log provider</param>
+        /// <returns>Response message, containing Base64 encoded image with transform applied</returns>
+        [FunctionName("Rotate")]
+        public static async Task<IActionResult> Rotate(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
+            ILogger log)
+        {
+            using (var reader = new StreamReader(req.Body))
+            {
+                string content = await reader.ReadToEndAsync();
+
+                if (string.IsNullOrEmpty(content))
+                {
+                    return new BadRequestObjectResult("Request body was empty");
+                }
+                else
+                {
+                    JsonSerializerSettings settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new Base64ImageJsonConverter());
+                    var rotate = JsonConvert.DeserializeObject<Rotate>(content, settings);
+
+                    var outputImg = rotate.Apply();
                     var response = new ImageResponse(outputImg);
                     return new OkObjectResult(JsonConvert.SerializeObject(response, settings));
                 }

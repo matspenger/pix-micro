@@ -16,6 +16,11 @@ namespace PixMicro.Core
         Base64Image InputImage { get; set; }
 
         /// <summary>
+        /// Apply this encoding to the output image.
+        /// </summary>
+        string OutputEncoding { get; }
+
+        /// <summary>
         /// Carry out the operation/transform, returning a new image
         /// </summary>
         /// <returns>Base64 encoded image with transform/edit applied</returns>

@@ -11,7 +11,7 @@ namespace PixMicro.Core
     public abstract class AbstractImageOperation : IImageOperation
     {
         /// <inheritdoc />
-        public abstract Base64Image InputImage { get; set; }
+        public Base64Image InputImage { get; set; }
 
         /// <summary>
         /// Apply this encoding to the output image. Default value is ".jpg".

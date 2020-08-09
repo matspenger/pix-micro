@@ -26,7 +26,11 @@ button {
 .action-form {
   padding: 5px 3px;
   background-color: #EEEEEE;
-  margin: 0 5px; }
+  margin: 0 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
 
 #content-inner {
   display: flex;
@@ -64,4 +68,5 @@ button {
   visibility: visible; }
 
 .hidden {
-  visibility: hidden; }
+  visibility: hidden;
+  display: none; }

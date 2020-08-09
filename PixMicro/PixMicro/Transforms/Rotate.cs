@@ -27,9 +27,6 @@ namespace PixMicro.Transforms
         public int RotateByDeg { get; set; }
 
         /// <inheritdoc />
-        public override Base64Image InputImage { get; set; }
-
-        /// <inheritdoc />
         public override Base64Image Apply()
         {
             var inputMat = Cv2.ImDecode(this.InputImage.Bytes, ImreadModes.Color);

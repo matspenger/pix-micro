@@ -19,9 +19,6 @@ namespace PixMicro.Transforms
         public FlipMode Mode { get; set; }
 
         /// <inheritdoc />
-        public override Base64Image InputImage { get; set; }
-
-        /// <inheritdoc />
         public override Base64Image Apply()
         {
             var inputMat = Cv2.ImDecode(this.InputImage.Bytes, ImreadModes.Color);

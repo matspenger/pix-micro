@@ -5,6 +5,7 @@ var ReactDOM = require('react-dom');
 
 import FlipForm from './components/FlipForm';
 import RotateForm from './components/RotateForm';
+import ScaleForm from './components/ScaleForm';
 
 interface IProps {
 }
@@ -51,6 +52,7 @@ export class App extends React.Component<IProps, IState> {
                         <button disabled={true}>Redo</button>
                         <FlipForm outputHandler={this.updateImage} isEnabled={this.hasImage()} inputImage={this.state.imageBase64} />
                         <RotateForm outputHandler={this.updateImage} isEnabled={this.hasImage()} inputImage={this.state.imageBase64} />
+                        <ScaleForm outputHandler={this.updateImage} isEnabled={this.hasImage()} inputImage={this.state.imageBase64} />
                     </div>
                     <div id="image">
                         <div id="file-form">

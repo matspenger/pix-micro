@@ -65,6 +65,9 @@
     <TypeScriptCompile Include="components\RotateForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="components\ScaleForm.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="components\ToolbarForm.tsx">
       <SubType>Code</SubType>
     </TypeScriptCompile>

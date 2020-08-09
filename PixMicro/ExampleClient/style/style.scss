@@ -42,6 +42,10 @@ button {
     padding: 5px 3px;
     background-color: $light-grey;
     margin: 0 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 #content-inner {
@@ -100,4 +104,5 @@ button {
 
 .hidden {
     visibility: hidden;
+    display: none;
 }
